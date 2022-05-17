@@ -1,15 +1,47 @@
 import Link from 'next/link'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons'
+import { faList } from '@fortawesome/free-solid-svg-icons'
+import { faGears } from '@fortawesome/free-solid-svg-icons'
 import MenuButton from '../components/MenuButton.js'
-export default function Navbar () {
-  return(
-    <div className='w-60 h-full bg-black shadow-lg absolute'>
-        <ul className='list-none'>
-            <li>
-                <Link href='/'><MenuButton icon={ faStopwatch } text= 'Home' clicked={true} /></Link>
-            </li>
-        </ul>
-    </div>
-  );
+import { useState } from 'react'
+export default function Navbar() {
+    const [state, setState] = useState({
+        activeButton: 'Home'
+    })
+    return (
+        <div className='w-56 h-full bg-black shadow-lg absolute divide-y divide-gray-50'>
+            <div className="inline-flex my-3 w-full justify-center">
+                    <Link href='/'><p className='font-light font-sans text-4xl text-gray-50'>dialed<span className='text-green-300'>In</span></p></Link>
+                </div>
+            <ul className='list-none'>
+                <li>
+                    <Link href='/'>
+                        <MenuButton
+                            icon={faStopwatch}
+                            text='Home'
+                            clicked={true}
+                        />
+                    </Link>
+                </li>
+                <li>
+                    <Link href='/'>
+                        <MenuButton
+                            icon={faList}
+                            text='History'
+                            clicked={false}
+                        />
+                    </Link>
+                </li>
+                <li className='absolute bottom-0 w-full'>
+                    <Link href='/'>
+                        <MenuButton
+                            icon={faGears}
+                            text='Settings'
+                            clicked={false}
+                        />
+                    </Link>
+                </li>
+            </ul>
+        </div>
+    )
 }
