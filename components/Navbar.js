@@ -1,18 +1,15 @@
 import Link from 'next/link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStopwatch } from '@fortawesome/free-solid-svg-icons'
+import MenuButton from '../components/MenuButton.js'
 export default function Navbar () {
   return(
-    <div className='min-h-screen w-10'>
-      <ul className ='grid grid-flow-row list-none min-h-screen'>
-        <li className='my-0 object-top'>
-          <Link href=''><div className='w-10 h-10 bg-black'></div></Link>
-        </li> 
-        <li className='object-top my-0'>
-          <Link href=''><div className='w-10 h-10 bg-black'></div></Link>
-        </li> 
-        <li className='place-self-end my-0'>
-          <Link href=''><div className='w-10 h-10 m-0 bg-black'></div></Link>
-        </li> 
-      </ul>
+    <div className='w-60 h-full bg-black shadow-lg absolute'>
+        <ul className='list-none'>
+            <li>
+                <Link href='/'><MenuButton icon={ faStopwatch } text= 'Home' clicked={true} /></Link>
+            </li>
+        </ul>
     </div>
   );
 }
