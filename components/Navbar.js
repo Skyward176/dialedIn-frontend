@@ -1,18 +1,10 @@
-import Link from 'next/link'
 import { faStopwatch } from '@fortawesome/free-solid-svg-icons'
 import { faList } from '@fortawesome/free-solid-svg-icons'
 import { faGears } from '@fortawesome/free-solid-svg-icons'
 import MenuButton from '../components/MenuButton.js'
-import { useState } from 'react'
+import Link from 'next/link'
 
 export default function Navbar() {
-    const [state, setState] = useState({
-        'active-button': 'Home',
-    })
-    const onClickHandler = (newActive) => {
-        setState(newActive)
-    }
-
     return (
         <div className='w-56 h-full bg-black shadow-lg absolute divide-y divide-gray-50'>
             <div className='inline-flex my-3 w-full justify-center'>
@@ -24,19 +16,13 @@ export default function Navbar() {
             </div>
             <ul className='list-none'>
                 <li>
-                    <Link href='/'>
-                        <MenuButton icon={faStopwatch} text='Home' onClickHandler={onClickHandler} />
-                    </Link>
+                    <MenuButton href='/' icon={faStopwatch} text='Home'  />
                 </li>
                 <li>
-                    <Link href='/'>
-                        <MenuButton icon={faList} text='History' clicked={false} />
-                    </Link>
+                    <MenuButton href='/history' icon={faList} text='History' />
                 </li>
                 <li className='absolute bottom-0 w-full'>
-                    <Link href='/'>
-                        <MenuButton icon={faGears} text='Settings' clicked={false} />
-                    </Link>
+                        <MenuButton href='/settings' icon={faGears} text='Settings' />
                 </li>
             </ul>
         </div>
