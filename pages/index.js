@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Navbar from '../components/Navbar'
+import Timer from '../components/Timer'
 
 export default function Home() {
   return (
@@ -10,10 +11,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <Navbar>
-
-        </Navbar>
+      <main className='flex flex-row'>
+        <Navbar/>
+        <Timer/>
       </main>
 
       <footer>
