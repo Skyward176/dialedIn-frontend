@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import {InputFormTop, InputFormBottom} from './InputForm'
 const Timer = () => {
     const [seconds, setSeconds] = useState(0)
     const [isActive, setIsActive] = useState(false)
 
     function toggle() {
         setIsActive(!isActive)
+
     }
 
     function reset() {
@@ -25,13 +25,9 @@ const Timer = () => {
         return () => clearInterval(interval)
     }, [isActive, seconds])
     return (
-        <div className='absolute flex flex-col top-0 right-0 w-5/6 h-screen items-center justify-center text-center'>
-            <InputFormTop/>
-            <p onClick={toggle} className='text-black font-extralight text-[20rem]'>
-                {seconds}
-            </p>
-            <InputFormBottom/>
-        </div>
+        <p onClick={toggle} className='text-black font-extralight text-[20rem]'>
+            {seconds}
+        </p>
     )
 }
 export default Timer
