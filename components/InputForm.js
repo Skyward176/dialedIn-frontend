@@ -18,16 +18,15 @@ export function InputFormTop(props) {
     return (
         <div>
             <input onInput= {props.mass1Handler} type='range' min='0' max='20' name='Mass In'></input>
-            <Select onChange={props.selectionHandler} options = {options} getOptionLabel={(options) => options['coffee_name']} getOptionValue={(options)=>options['coffee_name']}/>
+            <Select onChange={props.selectionHandler} options = {options} getOptionLabel={(options) => options['coffee_name']} getOptionValue={(options)=>options['id']}/>
         </div>
     )
 }
 export function InputFormBottom(props) {
-    
     return (
         <div>
-            <input onInput= {props.mass2Handler} type='range' min='0' max='20' name='Yield Out'></input>
-            <SubmitButton text='submit' />
+            <input onInput= {props.mass2Handler} type='range' min='0' max='40' name='Yield Out'></input>
+            <SubmitButton onClick={props.submitHandler} text='Submit'/>
         </div>
     )
 }

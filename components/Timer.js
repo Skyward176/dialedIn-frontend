@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-const Timer = () => {
-    const [seconds, setSeconds] = useState(0)
+const Timer = (props) => {
     const [isActive, setIsActive] = useState(false)
 
     function toggle() {
@@ -9,7 +8,7 @@ const Timer = () => {
     }
 
     function reset() {
-        setSeconds(0)
+        props.setSeconds(0)
         setIsActive(false)
     }
 
@@ -17,16 +16,27 @@ const Timer = () => {
         let interval = null
         if (isActive) {
             interval = setInterval(() => {
-                setSeconds((seconds) => seconds + 1)
+                props.setSeconds((seconds) => seconds + 1)
             }, 1000)
-        } else if (!isActive && seconds !== 0) {
+        } else if (!isActive && props.seconds !== 0) {
             clearInterval(interval)
         }
         return () => clearInterval(interval)
-    }, [isActive, seconds])
+    }, [isActive, props.seconds])
+    const timerHandler = () => {
+        if(!isActive) {
+            if(props.seconds != 0){
+                reset()
+            }else{
+                toggle()
+            }
+        } else{
+            toggle()
+        }
+    }
     return (
-        <p onClick={toggle} className='text-black font-extralight text-[20rem]'>
-            {seconds}
+        <p onClick={timerHandler} className='text-black font-extralight text-[20rem]'>
+            {props.seconds}
         </p>
     )
 }
