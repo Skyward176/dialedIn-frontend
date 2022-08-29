@@ -1,6 +1,4 @@
-import { faStopwatch } from '@fortawesome/free-solid-svg-icons'
-import { faList } from '@fortawesome/free-solid-svg-icons'
-import { faGears } from '@fortawesome/free-solid-svg-icons'
+import { faStopwatch, faList, faGears, faUser} from '@fortawesome/free-solid-svg-icons'
 import MenuButton from '../components/MenuButton.js'
 import Link from 'next/link'
 
@@ -20,6 +18,9 @@ export default function Navbar() {
                 </li>
                 <li>
                     <MenuButton href='/history' icon={faList} text='History' />
+                </li>
+                <li>
+                    <MenuButton href='/login' icon={faUser} text='Sign In' />
                 </li>
                 <li className='absolute bottom-0 w-full'>
                         <MenuButton href='/settings' icon={faGears} text='Settings' />

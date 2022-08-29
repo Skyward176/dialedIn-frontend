@@ -1,14 +1,19 @@
-import MenuButton from './MenuButton'
 import SubmitButton from './SubmitButton'
 import Select from 'react-select'
 import axios from 'axios'
 import { useEffect, useState} from 'react'
-
+import {useCookies} from 'react-cookie'
 const baseURL= 'http://localhost:8000'
 export function InputFormTop(props) {
     const [options, setOptions] = useState(0)
+    const [cookies, setCookies, removeCookies] = useCookies()
     useEffect(() => {
-        axios.get(baseURL+'/coffees').then((res)=>{
+        axios.get(baseURL+'/coffees', {
+            headers: {
+                'Authorization': `Bearer ${cookies['access']}`,
+                'Content-Type': 'application/json'
+            }
+        }).then((res)=>{
             let data = res.data.results
             return data
         }).then((data) => {

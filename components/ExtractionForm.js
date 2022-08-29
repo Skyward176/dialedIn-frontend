@@ -3,6 +3,7 @@ import {InputFormTop} from '../components/InputForm'
 import Timer from '../components/Timer'
 import { useState } from 'react'
 import axios from 'axios'
+import { useCookies } from 'react-cookie'
 const ExtractionForm = () => {
 
     const baseURL= 'http://localhost:8000'
@@ -12,7 +13,8 @@ const ExtractionForm = () => {
     const [mass2, setMass2] = useState(0)
     //timer state
     const [seconds, setSeconds] = useState(0)
-
+    const [cookies, setCookies, removeCookies] = useCookies()
+     
     const handleSubmit = (e) => {
         console.log("Submit button triggered")
         axios.post(baseURL + '/extractions/', {
@@ -23,6 +25,11 @@ const ExtractionForm = () => {
             "mass_in": mass1,
             "mass_out": mass2,
             "notes": "Test"
+        },{
+        headers: {
+            'Authorization': `Bearer ${cookies['access']}`,
+            'Content-Type': 'application/json'
+        }
         }).then(function (response){
             console.log(response);
         }).catch(function (error){
