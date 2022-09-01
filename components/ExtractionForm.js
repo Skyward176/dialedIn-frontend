@@ -1,9 +1,15 @@
 import {InputFormBottom} from '../components/InputForm'
 import {InputFormTop} from '../components/InputForm'
 import Timer from '../components/Timer'
+
 import { useState } from 'react'
+import { useEffect } from 'react'
+
 import axios from 'axios'
 import { useCookies } from 'react-cookie'
+import { useRouter } from 'next/router'
+
+import {useUser} from '../components/UserContext'
 const ExtractionForm = () => {
 
     const baseURL= 'http://localhost:8000'
@@ -14,7 +20,7 @@ const ExtractionForm = () => {
     //timer state
     const [seconds, setSeconds] = useState(0)
     const [cookies, setCookies, removeCookies] = useCookies()
-     
+    
     const handleSubmit = (e) => {
         console.log("Submit button triggered")
         axios.post(baseURL + '/extractions/', {
@@ -46,6 +52,17 @@ const ExtractionForm = () => {
     const mass2Handler = (e) => {
         setMass2(e.target.value)
     }
+    
+    const router = useRouter()
+
+    const [user, setUser]= useUser()
+
+    useEffect( () => {
+        if (!user.isAuthenticated) {
+            router.push('/login') 
+        }
+    })
+    
 
     return (
         <div className='absolute flex flex-col top-0 right-0 w-5/6 h-screen items-center justify-center text-center'>

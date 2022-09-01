@@ -1,8 +1,6 @@
 import Head from 'next/head'
 import Navbar from '../components/Navbar'
-import Timer from '../components/Timer'
 import ExtractionForm from '../components/ExtractionForm'
-
 export default function Home() {
   return (
     <div>
@@ -14,7 +12,7 @@ export default function Home() {
 
       <main className='flex flex-row'>
         <Navbar/>
-        <ExtractionForm/>
+        <ExtractionForm />
       </main>
 
       <footer>
