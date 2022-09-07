@@ -1,5 +1,5 @@
 import { faStopwatch, faList, faGears, faUser} from '@fortawesome/free-solid-svg-icons'
-import MenuButton from '../components/MenuButton.js'
+import MenuButton from '../components/MenuButton'
 import Link from 'next/link'
 
 export default function Navbar() {
@@ -8,7 +8,7 @@ export default function Navbar() {
             <div className='inline-flex my-3 w-full justify-center'>
                 <Link href='/'>
                     <p className='font-light font-sans text-4xl text-gray-50'>
-                        dialed<span className='text-green-300'>In</span>
+                        dialed<span className='text-mint-green'>In</span>
                     </p>
                 </Link>
             </div>
