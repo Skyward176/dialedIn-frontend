@@ -26,7 +26,7 @@ const ExtractionForm = () => {
             .post(
                 baseURL + '/extractions/',
                 {
-                    user_id: 1,
+                    user_id: user.user_id,
                     coffee_id: selection,
                     timestamp: new Date().toISOString(),
                     extraction_length: seconds,
@@ -60,7 +60,7 @@ const ExtractionForm = () => {
 
     const router = useRouter()
 
-    const [user, setUser] = useUser()
+    const user = useUser()
 
     useEffect(() => {
         if (!user.isAuthenticated) {

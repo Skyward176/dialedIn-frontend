@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useCookies } from "react-cookie"
 import { useRouter } from "next/router"
-import { useUser } from '../components/UserContext'
+import { useUser, useUserLogin} from '../components/UserContext'
 
 import HorizontalNavbar from '../components/HorizontalNavbar'
 export default function Login () {
@@ -13,7 +13,8 @@ export default function Login () {
     
     const router = useRouter()
     const baseURL= 'http://localhost:8000'
-    const [user, setUser] = useUser()
+    const user = useUser() 
+    const handleUserLogin = useUserLogin()
     const handleSubmit = (e) => {
         e.preventDefault()
         axios.post(
@@ -24,8 +25,8 @@ export default function Login () {
         ).then(function (response) {
             setCookies('access',response.data.access)
             setCookies('refresh',response.data.refresh)
+            handleUserLogin()
 
-            setUser() 
 
             router.push('/') 
         }).catch( function (error) {
