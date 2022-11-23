@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useCookies } from "react-cookie"
 import { useRouter } from "next/router"
-import { useUser, useUserLogin} from '../components/UserContext'
+import { useUser, useSetUser} from '../components/UserContext'
 
 import HorizontalNavbar from '../components/HorizontalNavbar'
 export default function Login () {
@@ -14,7 +14,7 @@ export default function Login () {
     const router = useRouter()
     const baseURL= 'http://localhost:8000'
     const user = useUser() 
-    const handleUserLogin = useUserLogin()
+    const setUser = useSetUser()
     const handleSubmit = (e) => {
         e.preventDefault()
         axios.post(
@@ -22,15 +22,29 @@ export default function Login () {
                 'username': username,
                 'password': password
             }        
+
         ).then(function (response) {
             setCookies('access',response.data.access)
             setCookies('refresh',response.data.refresh)
-            handleUserLogin()
 
+            axios.get(baseURL + '/profile/',{
+                headers: {
+                    'Authorization': `Bearer ${response.data.access}`,
+                    'Content-Type': 'application/json'
+                }
+            }).then((res) => {
+                setUser({
+                    'isAuthenticated': true,
+                    'username': res.data.username,
+                    'user_id': res.data.user_id
+                })
+            }).then(() => {
 
-            router.push('/') 
+                router.push('/') 
+
+            })
         }).catch( function (error) {
-            console.log(error)
+            console.log("error after login" + error)
         });
     }
 

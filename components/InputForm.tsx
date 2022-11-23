@@ -11,34 +11,9 @@ export function InputFormTop(props) {
     const [options, setOptions] = useState(0)
     const [cookies, setCookies, removeCookies] = useCookies()
 
-    //const preflightRequest = useTokenContext()
-    const tokenPreflight = () => {
-        axios.post(
-            baseURL + '/token/validate', {
-                headers: {
-                    Authorization: `Bearer ${cookies['access']}`,
-                    'Content-Type': 'application/json',
-                }
-            }        
-        ).catch(function (error) {
-            if(error.response){
-                axios.post(
-                    baseURL + '/token/', {
-                        headers: {
-                            Authorization: `Bearer ${cookies['access']}`,
-                            'Content-Type': 'application/json',
-                        }
-                    }        
-                ).then(function (response){
-                    setCookies('access',response.data.access)
-                    setCookies('refresh',response.data.refresh)
-                    console.log('Tokens Refreshed')
-                })
-            } else {
-                console.log(error)
-            }
-        });
-    }
+    const tokenPreflight =  useTokenContext()
+
+
     useEffect(() => {
         tokenPreflight()
         axios.get(baseURL+'/coffees', {
