@@ -31,6 +31,7 @@ export function TokenValidateProvider({children}) {
                     setCookies('refresh',response.data.refresh)
                 })
             } else {
+                console.log("Error in preflight")
                 console.log(error)
             }
         });
