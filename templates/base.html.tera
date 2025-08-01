@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <title>{% block title %}{{ title }}{% endblock title %}</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    {% endblock head %}
+</head>
+<body>
+    <div class="text sm light" id="content">
+        {% block content %}
+        {{content}}
+        {% endblock content %}
+    </div>
+</body>
+</html>
